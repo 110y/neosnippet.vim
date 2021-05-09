@@ -155,6 +155,12 @@ function! s:get_completed_snippets(cur_text, col) abort
     return []
   endif
 
+  if has_key(v:completed_item, 'kind')
+      if v:completed_item['kind'] !=# 'Snippet'
+          return []
+      endif
+  end
+
   if has_key(v:completed_item, 'user_data')
     let ret = s:get_user_data(a:cur_text)
     if !empty(ret)
